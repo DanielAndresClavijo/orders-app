@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:orders_app/screens/app.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:orders_app/config/router/orders/orders_routes.dart';
+import 'package:orders_app/ui/app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(const OrdersApp());
+  kOrdersHistoryPathName;
+  runApp(const ProviderScope(child: OrdersApp()));
 }
