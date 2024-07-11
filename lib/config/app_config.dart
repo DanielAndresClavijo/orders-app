@@ -29,8 +29,8 @@ class AppConfig {
   factory AppConfig.initialize() {
     return const AppConfig._(
       clientEnvironment: ClientEnvironment.fromBaaS,
-      supabaseUrl: "https://your-supabase-url.supabase.co",
-      supabaseKey: "your-supabase-api-key",
+      supabaseUrl: "",
+      supabaseKey: "",
       orderTableName: "orders",
     );
   }
