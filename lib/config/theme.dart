@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const Color kDarkColorApp = Color(0xFF1C1C1C);
-const Color kWhiteColorApp = Color(0xFFFFFFFF);
+const Color kWhiteColorApp = Color(0xFFF5F5F5);
 const Color kSeedColorApp = Color(0xFF00A877);
 
 ThemeData appTheme(bool isDarkMode) => ThemeData(
-      // primaryColor:
+      primaryColor: kDarkColorApp,
       colorScheme: ColorScheme.fromSeed(
         seedColor: isDarkMode ? kWhiteColorApp : kDarkColorApp,
         brightness: isDarkMode ? Brightness.dark : Brightness.light,
       ),
-      scaffoldBackgroundColor:
-          isDarkMode ? kDarkColorApp : const Color(0xFFF8F8F8),
+      scaffoldBackgroundColor: isDarkMode ? kDarkColorApp : kWhiteColorApp,
       cardColor: isDarkMode ? const Color(0xFF2C2C2C) : kWhiteColorApp,
       textTheme: TextTheme(
         displayLarge: TextStyle(
@@ -30,15 +28,20 @@ ThemeData appTheme(bool isDarkMode) => ThemeData(
           fontWeight: FontWeight.normal,
           color: isDarkMode ? kWhiteColorApp : kDarkColorApp,
         ),
-        titleMedium: const TextStyle(
+        titleMedium: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: kSeedColorApp,
+          color: isDarkMode ? kWhiteColorApp : kDarkColorApp,
         ),
         titleSmall: TextStyle(
-          fontSize: 14,
+          fontSize: 12,
           fontWeight: FontWeight.w500,
-          color: isDarkMode ? const Color(0xFFA1A1A1) : const Color(0xFFFF4D4D),
+          color: isDarkMode ? kWhiteColorApp : kDarkColorApp,
+        ),
+        labelSmall: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: (isDarkMode ? kWhiteColorApp : kDarkColorApp).withOpacity(0.8),
         ),
       ),
       appBarTheme: AppBarTheme(
@@ -73,7 +76,3 @@ class ThemeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-final themeNotifierProvider = ChangeNotifierProvider<ThemeNotifier>((ref) {
-  return ThemeNotifier();
-});

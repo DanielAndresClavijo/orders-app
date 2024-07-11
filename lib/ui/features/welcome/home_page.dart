@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:orders_app/config/assets.dart';
 import 'package:orders_app/config/router/auth/auth_routes.dart';
+import 'package:orders_app/ui/core/components/base/elevated_base_button.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 class HomePage extends StatelessWidget {
@@ -85,19 +86,10 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  ElevatedButton(
+                  ElevatedBaseButton(
                     onPressed: () {
                       context.go(kLoginPath);
                     },
-                    style: ButtonStyle(
-                      visualDensity: VisualDensity.comfortable,
-                      alignment: Alignment.center,
-                      shape: WidgetStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
                     child: const Text("SABER MAS"),
                   ),
                 ],

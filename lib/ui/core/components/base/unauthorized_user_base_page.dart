@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:orders_app/ui/core/button_theme.dart';
+import 'package:orders_app/ui/core/components/buttons/theme_button.dart';
 
 /// Layout base para las pantallas donde el usuario no este autenticado.
+///
+/// Ejemplo de pantallas donde el usuario no esta autenticado, son:
+///  - HomePage
+///  - LoginPage
+///  - RegisterPage
 class UnauthorizedBasePage extends StatelessWidget {
   final Widget child;
 
@@ -17,7 +22,7 @@ class UnauthorizedBasePage extends StatelessWidget {
         leadingWidth: 56,
         leading: const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 0, 8),
-          child: ButtonThemeWidget(),
+          child: ThemeButtonWidget(),
         ),
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -41,21 +41,3 @@ const String kOrderDetailPath = "$_kOrderBasePath/$_kOrderDetailSubPath";
 ///
 ///  __Nombre de Ruta `orderDetailPathName`__
 const String kOrderDetailPathName = "orderDetailPathName";
-
-/// Sub-path para la ruta del historial de pedidos.
-///
-/// Nota: El sub-path es utilizado por GoRoute para las rutas anidadas.
-const String _kOrdersHistorySubPath = "history";
-
-/// # Ruta para navegar al historial de pedidos.
-///
-/// __Ruta `/orders/history`__
-const String kOrdersHistoryPath = "$_kOrderBasePath/$_kOrdersHistorySubPath";
-
-/// # Nombre de Ruta para navegar al historial pedidos.
-///
-///  Nota: El nombre de ruta se usa como identificador unico de la ruta, que
-///  en algunas ocasiones puede ser util para cuando se navega por nombre.
-///
-///  __Nombre de Ruta `historyPathName`__
-const String kOrdersHistoryPathName = "historyPathName";

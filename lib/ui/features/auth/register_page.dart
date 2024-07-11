@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:orders_app/config/router/orders/orders_routes.dart';
 import 'package:orders_app/config/router/welcome/welcome_routes.dart';
+import 'package:orders_app/ui/core/components/base/elevated_base_button.dart';
+import 'package:orders_app/ui/core/components/buttons/interactive_text_button.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
-import 'package:orders_app/ui/core/interactive_text_button.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -51,27 +52,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
+              ElevatedBaseButton(
                 onPressed: () {
                   context.go(kOrdersListPath);
                 },
-                style: ButtonStyle(
-                  visualDensity: VisualDensity.comfortable,
-                  padding: const WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                  alignment: Alignment.center,
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
-                child: Text(
+                child: const Text(
                   'REGISTRARSE',
-                  style: context.font.titleMedium?.copyWith(
-                    color: context.color.onSurface,
-                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
