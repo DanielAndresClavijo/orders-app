@@ -46,12 +46,23 @@ class _OrderListWidgetState extends State<OrderListWidget> {
             crossAxisCount: columnCount,
             crossAxisSpacing: _kCellSpacing,
             mainAxisSpacing: columnCount == 1 ? 0 : _kCellSpacing,
-            mainAxisExtent: 102,
+            mainAxisExtent: 126,
           ),
           itemCount: _orders.length,
           itemBuilder: (context, index) {
             final order = _orders[index];
-            return OrderListItemWidget(order: order);
+            return Column(
+              children: [
+                Flexible(child: OrderListItemWidget(order: order)),
+                Divider(
+                  height: 20,
+                  thickness: 2,
+                  indent: 16,
+                  endIndent: 16,
+                  color: Colors.grey.withOpacity(0.2),
+                ),
+              ],
+            );
           },
         );
       },
