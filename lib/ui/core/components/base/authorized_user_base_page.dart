@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:orders_app/config/router/welcome/welcome_routes.dart';
 import 'package:orders_app/ui/core/components/buttons/back_button.dart';
 import 'package:orders_app/ui/core/components/buttons/menu_wrapper_button.dart';
+import 'package:orders_app/ui/core/components/navigation_history.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 /// Origen de la página del pedido
@@ -15,10 +15,12 @@ enum OrderPageOrigin { list, history, detail }
 ///  - OrderHistory
 ///  - OrderDetails
 class AuthorizedBasePage extends StatelessWidget {
+  final NavigationHistory navigationHistory;
   final Widget child;
 
   const AuthorizedBasePage({
     super.key,
+    required this.navigationHistory,
     required this.child,
   });
 
@@ -31,7 +33,7 @@ class AuthorizedBasePage extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
           child: BackButtonWidget(
             onBack: () {
-              context.go(kHomePath);
+              context.go(navigationHistory.popPath);
             },
           ),
         ),

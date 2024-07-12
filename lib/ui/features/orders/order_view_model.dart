@@ -38,6 +38,17 @@ class OrderListViewModel extends StateNotifier<OrderListViewModelState> {
     }
   }
 
+  Future<Order?> getOrderDetails(int orderId) async {
+    try {
+      final newOrder = await ordersUseCase.get(orderId);
+      return Future.value(newOrder);
+    } catch (e) {
+      debugPrint("$e");
+      _onError("No se pudo obtener los detalles pedidos");
+      return Future.error(e);
+    }
+  }
+
   void _onError(String error) {
     providerContainer.read(appNotifierProvider.notifier).showError(
           message: error,

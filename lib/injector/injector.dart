@@ -13,6 +13,7 @@ import 'package:orders_app/domain/repositories/auth_repository.dart';
 import 'package:orders_app/domain/repositories/orders_repository.dart';
 import 'package:orders_app/domain/usecases/auth_use_case.dart';
 import 'package:orders_app/domain/usecases/orders_use_case.dart';
+import 'package:orders_app/ui/core/components/navigation_history.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Injector {
@@ -53,6 +54,9 @@ class Injector {
     /// Registro de configuracion de la app.
     _getIt.registerSingleton<AppConfig>(appConfig);
 
+    /// Registro del historial de navegación de la app.
+    _registerNavigationHistory();
+
     if (client != null) {
       /// Registro de Datasource con cliente Supabase.
       _registerAuthSupabaseDatasource(client);
@@ -76,6 +80,10 @@ class Injector {
     _getIt.registerFactory<AuthDatasource>(
       () => AuthSupabaseDatasource(client),
     );
+  }
+
+  void _registerNavigationHistory() {
+    _getIt.registerSingleton<NavigationHistory>(NavigationHistory());
   }
 
   void _registerAuthLocalDatasource() {

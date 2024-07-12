@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:orders_app/config/router/common_router.dart';
 import 'package:orders_app/ui/core/components/base/authorized_user_base_page.dart';
-import 'package:orders_app/ui/features/orders/order_detail.dart';
-import 'package:orders_app/ui/features/orders/order_list.dart';
+import 'package:orders_app/ui/core/components/navigation_history.dart';
+import 'package:orders_app/ui/features/orders/order_detail_page.dart';
+import 'package:orders_app/ui/features/orders/order_list_page.dart';
 
 part 'orders_routes_texts.dart';
 
@@ -22,14 +23,17 @@ class OrdersRoutes {
 
   const OrdersRoutes._(this.routes);
 
-  factory OrdersRoutes() {
+  factory OrdersRoutes(NavigationHistory navigationHistory) {
     final baseRoute = _buildBaseRoute();
     final ShellRoute main = ShellRoute(
       navigatorKey: _shellNavigatorKey,
-      pageBuilder: (_, GoRouterState state, Widget child) {
+      pageBuilder: (context, GoRouterState state, Widget child) {
         return getDefaultTransitionPage(
           key: state.pageKey,
-          child: AuthorizedBasePage(child: child),
+          child: AuthorizedBasePage(
+            navigationHistory: navigationHistory,
+            child: child,
+          ),
         );
       },
       routes: [
@@ -76,7 +80,9 @@ class OrdersRoutes {
       },
       pageBuilder: (context, state) => getDefaultTransitionPage(
         key: state.pageKey,
-        child: OrderDetail(orderId: state.pathParameters['orderId']!),
+        child: OrderDetailPage(
+          orderId: int.tryParse(state.pathParameters['orderId']!) ?? -1,
+        ),
       ),
     );
   }

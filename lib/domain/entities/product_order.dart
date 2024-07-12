@@ -22,6 +22,9 @@ class ProductOrder {
   /// Manejar rangos entre 0 y 1.
   final double discount;
 
+  /// Cantidad de productos en el pedido.
+  final int count;
+
   /// Id que relaciona este producto con un pedido.
   final int orderId;
 
@@ -31,6 +34,7 @@ class ProductOrder {
     required this.name,
     this.price = 0,
     this.discount = 0,
+    this.count = 1,
     required this.orderId,
   });
 
@@ -45,6 +49,7 @@ class ProductOrder {
     final String? name,
     final double? price = 0,
     final double? discount = 0,
+    final int? count = 0,
     final int? orderId,
   }) {
     return ProductOrder(
@@ -53,6 +58,7 @@ class ProductOrder {
       name: name ?? this.name,
       orderId: orderId ?? this.orderId,
       discount: discount ?? this.discount,
+      count: count ?? this.count,
       price: price ?? this.price,
     );
   }
@@ -65,6 +71,7 @@ class ProductOrder {
         "\n  name: $name,"
         "\n  price: $price,"
         "\n  discount: $discount,"
+        "\n  count: $count,"
         "\n  orderId: $orderId"
         "\n}";
   }
@@ -79,6 +86,7 @@ class ProductOrder {
           name == other.name &&
           price == other.price &&
           discount == other.discount &&
+          count == other.count &&
           orderId == other.orderId;
 
   @override
@@ -88,5 +96,6 @@ class ProductOrder {
       name.hashCode ^
       price.hashCode ^
       discount.hashCode ^
+      count.hashCode ^
       orderId.hashCode;
 }

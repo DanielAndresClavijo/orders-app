@@ -4,20 +4,23 @@ import 'package:orders_app/injector/injector_providers.dart';
 import 'package:orders_app/ui/app_view_model.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
-/// Widget que configura las notificaciones para mostrar mensajes flotantes en
-/// la app.
-class NotificationWrapperBasePage extends ConsumerWidget {
+/// Widget base que envuelve toda la app.
+class AppWrapper extends ConsumerWidget {
   final Widget child;
 
-  const NotificationWrapperBasePage({super.key, required this.child});
+  const AppWrapper({
+    super.key,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    setupSnackBar(ref);
+    _setupSnackBar(ref);
     return child;
   }
 
-  void setupSnackBar(WidgetRef ref) {
+  /// Configura la snack-bar para las notificaciones de la app.
+  void _setupSnackBar(WidgetRef ref) {
     final notification = ref.watch(appNotifierProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
