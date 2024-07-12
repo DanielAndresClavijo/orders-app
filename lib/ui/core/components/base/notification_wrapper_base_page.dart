@@ -6,10 +6,10 @@ import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 /// Widget que configura las notificaciones para mostrar mensajes flotantes en
 /// la app.
-class NotificationWrapperWidget extends ConsumerWidget {
+class NotificationWrapperBasePage extends ConsumerWidget {
   final Widget child;
 
-  const NotificationWrapperWidget({super.key, required this.child});
+  const NotificationWrapperBasePage({super.key, required this.child});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
