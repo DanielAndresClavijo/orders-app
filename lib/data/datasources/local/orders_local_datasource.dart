@@ -18,19 +18,22 @@ List<Order> _ordersMock = [
   Order(
     id: 1,
     createdAt: DateTime(2024, 6, 10, 16, 55),
-    name: "Habibi",
+    companyName: "Habibi",
+    address: "Benito Juárez #231",
     uuid: "1",
   ),
   Order(
     id: 2,
     createdAt: DateTime(2024, 6, 10, 16, 55),
-    name: "Habibi",
+    companyName: "Habibi",
+    address: "Benito Juárez #231",
     uuid: "1",
   ),
   Order(
     id: 3,
     createdAt: DateTime(2024, 6, 10, 16, 55),
-    name: "Habibi",
+    companyName: "Habibi",
+    address: "Benito Juárez #231",
     uuid: "1",
   ),
 ];

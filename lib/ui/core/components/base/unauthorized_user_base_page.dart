@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orders_app/ui/core/components/buttons/theme_button.dart';
+import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 /// Layout base para las pantallas donde el usuario no este autenticado.
 ///
@@ -24,16 +25,17 @@ class UnauthorizedBasePage extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 0, 8),
           child: ThemeButtonWidget(),
         ),
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(8.0),
               child: Icon(Icons.fastfood),
             ),
             Flexible(
               child: Text(
                 "Foddie",
+                style: context.font.headlineMedium,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

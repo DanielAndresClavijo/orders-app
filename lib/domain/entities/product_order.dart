@@ -39,6 +39,24 @@ class ProductOrder {
 
   Map<String, dynamic> toJson() => _$ProductOrderToJson(this);
 
+  ProductOrder copyWith({
+    final int? id,
+    final DateTime? createdAt,
+    final String? name,
+    final double? price = 0,
+    final double? discount = 0,
+    final int? orderId,
+  }) {
+    return ProductOrder(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      name: name ?? this.name,
+      orderId: orderId ?? this.orderId,
+      discount: discount ?? this.discount,
+      price: price ?? this.price,
+    );
+  }
+
   @override
   String toString() {
     return "ProductOrder{"

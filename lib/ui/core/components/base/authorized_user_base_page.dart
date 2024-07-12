@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:orders_app/config/router/welcome/welcome_routes.dart';
 import 'package:orders_app/ui/core/components/buttons/back_button.dart';
 import 'package:orders_app/ui/core/components/buttons/menu_wrapper_button.dart';
+import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 /// Origen de la página del pedido
 enum OrderPageOrigin { list, history, detail }
@@ -40,9 +41,10 @@ class AuthorizedBasePage extends StatelessWidget {
             child: MenuWrapperButtonWidget(onWrap: () {}),
           ),
         ],
-        title: const Center(
+        title: Center(
           child: Text(
-            "Hitorial",
+            "Historial",
+            style: context.font.headlineMedium,
             overflow: TextOverflow.ellipsis,
           ),
         ),

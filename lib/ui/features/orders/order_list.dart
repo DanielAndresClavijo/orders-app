@@ -59,13 +59,10 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 16,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                   child: Text(
                     "Pedidos anteriores",
-                    style: context.font.bodyLarge,
+                    style: context.font.titleMedium,
                     textAlign: TextAlign.left,
                   ),
                 ),

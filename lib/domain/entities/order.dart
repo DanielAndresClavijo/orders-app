@@ -8,8 +8,9 @@ part 'order.g.dart';
 ///   - [cancelled] Pedido cancelado
 ///   - [completed] Pedido pagado y enviado
 ///   - [pending] Pedido pendiente en confirmar
-enum OrderStatus { cancelled, completed, pending }
+enum OrderStatus { cancelled, completed, pending, noShow }
 
+/// Tipos de Metodos de pago
 enum PaymentMethod { visa, mastercard }
 
 /// Entidad para Pedidos.
@@ -21,8 +22,14 @@ class Order {
   /// Fecha de creacion.
   final DateTime createdAt;
 
+  /// Fecha de actualizacion.
+  final DateTime updatedAt;
+
   /// Nombre de la orden.
-  final String name;
+  final String companyName;
+
+  /// Direccion de envio de pedido.
+  final String address;
 
   /// Listado de ids de los productos relacionados al pedido.
   final List<ProductOrder> products;
@@ -48,7 +55,8 @@ class Order {
   const Order({
     required this.id,
     required this.createdAt,
-    required this.name,
+    required this.companyName,
+    required this.address,
     this.products = const [],
     this.status = OrderStatus.pending,
     this.tip = 0,
@@ -56,18 +64,33 @@ class Order {
     this.paymentMethod,
     required this.uuid,
     this.imageId = "",
-  });
+  }) : updatedAt = createdAt;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrderToJson(this);
+
+  double get priceWithDiscount {
+    double price = 0;
+    for (var product in products) {
+      price += product.price * product.discount;
+    }
+
+    return price;
+  }
+
+  double get totalPrice => priceWithDiscount + shipment + tip;
+
+  bool get isPromoLive => shipment == 0;
 
   @override
   String toString() {
     return "Order{"
         "\n  id: $id,"
         "\n  createdAt: $createdAt,"
-        "\n  name: $name,"
+        "\n  updatedAt: $updatedAt,"
+        "\n  companyName: $companyName,"
+        "\n  address: $address,"
         "\n  products: $products,"
         "\n  status: $status,"
         "\n  tip: $tip,"
@@ -85,7 +108,9 @@ class Order {
           runtimeType == other.runtimeType &&
           id == other.id &&
           createdAt == other.createdAt &&
-          name == other.name &&
+          updatedAt == other.updatedAt &&
+          companyName == other.companyName &&
+          address == other.address &&
           products == other.products &&
           status == other.status &&
           tip == other.tip &&
@@ -97,8 +122,9 @@ class Order {
   @override
   int get hashCode =>
       id.hashCode ^
-      createdAt.hashCode ^
-      name.hashCode ^
+      updatedAt.hashCode ^
+      companyName.hashCode ^
+      address.hashCode ^
       products.hashCode ^
       status.hashCode ^
       tip.hashCode ^

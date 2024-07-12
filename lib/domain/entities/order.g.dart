@@ -9,7 +9,8 @@ part of 'order.dart';
 Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       id: (json['id'] as num).toInt(),
       createdAt: DateTime.parse(json['createdAt'] as String),
-      name: json['name'] as String,
+      companyName: json['companyName'] as String,
+      address: json['address'] as String,
       products: (json['products'] as List<dynamic>?)
               ?.map((e) => ProductOrder.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -27,7 +28,8 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
-      'name': instance.name,
+      'companyName': instance.companyName,
+      'address': instance.address,
       'products': instance.products,
       'status': _$OrderStatusEnumMap[instance.status]!,
       'tip': instance.tip,
@@ -41,6 +43,7 @@ const _$OrderStatusEnumMap = {
   OrderStatus.cancelled: 'cancelled',
   OrderStatus.completed: 'completed',
   OrderStatus.pending: 'pending',
+  OrderStatus.noShow: 'noShow',
 };
 
 const _$PaymentMethodEnumMap = {

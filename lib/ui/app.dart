@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orders_app/config/router/common_router.dart';
 import 'package:orders_app/injector/injector_providers.dart';
-import 'package:orders_app/ui/core/components/notification_widget.dart';
+import 'package:orders_app/ui/core/components/base/notification_wrapper_base_page.dart';
 
 class OrdersApp extends ConsumerStatefulWidget {
   const OrdersApp({super.key});
@@ -29,7 +29,7 @@ class _OrdersAppState extends ConsumerState<OrdersApp> {
       title: 'Order App',
       theme: theme.theme,
       routerConfig: router.router,
-      builder: (_, child) => NotificationWrapperWidget(
+      builder: (_, child) => NotificationWrapperBasePage(
         child: child ?? const Center(),
       ),
     );
