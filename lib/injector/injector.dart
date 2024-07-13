@@ -31,7 +31,7 @@ class Injector {
     final instance = Injector._();
     SupabaseClient? client;
 
-    if (appConfig.supabaseKey.isNotEmpty || appConfig.supabaseUrl.isNotEmpty) {
+    if (appConfig.clientEnvironment == ClientEnvironment.fromBaaS) {
       final supabase = await Supabase.initialize(
         url: appConfig.supabaseUrl,
         anonKey: appConfig.supabaseKey,
