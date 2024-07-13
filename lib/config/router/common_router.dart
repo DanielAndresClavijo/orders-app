@@ -7,7 +7,6 @@ import 'package:orders_app/config/router/orders/orders_routes.dart';
 import 'package:orders_app/config/router/welcome/welcome_routes.dart';
 import 'package:orders_app/domain/usecases/auth_use_case.dart';
 import 'package:orders_app/ui/core/components/base/unauthorized_user_base_page.dart';
-import 'package:orders_app/ui/core/components/navigation_history.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
