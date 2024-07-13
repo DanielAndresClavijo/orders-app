@@ -43,6 +43,15 @@ class ProductOrder {
 
   Map<String, dynamic> toJson() => _$ProductOrderToJson(this);
 
+  /// Descuento de precio completo.
+  double get totalPriceDiscount => price * count * discount;
+
+  /// Precio total del producto.
+  double get totalPrice => price * count;
+
+  /// Precio total del producto con el descuento aplicado.
+  double get totalPriceWithDiscount => totalPrice - totalPriceDiscount;
+
   ProductOrder copyWith({
     final int? id,
     final DateTime? createdAt,

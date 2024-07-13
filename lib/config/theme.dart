@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const Color kDarkColorApp = Color(0xFF1C1C1C);
+const Color kDarkColorApp = Color(0xFF333333);
 const Color kWhiteColorApp = Color(0xFFF5F5F5);
 const Color kSeedColorApp = Color(0xFF00A877);
 
@@ -11,9 +11,11 @@ ThemeData appTheme(bool isDarkMode) {
     colorScheme: ColorScheme.fromSeed(
       seedColor: isDarkMode ? kWhiteColorApp : kDarkColorApp,
       brightness: isDarkMode ? Brightness.dark : Brightness.light,
+      error: isDarkMode ? const Color(0xFF1A1A1A) : const Color(0xFFFFE6F2),
+      onError: isDarkMode ? const Color(0xFFAD1457) : const Color(0xFFE91E63),
     ),
     scaffoldBackgroundColor: isDarkMode ? kDarkColorApp : kWhiteColorApp,
-    cardColor: isDarkMode ? const Color(0xFF2C2C2C) : kWhiteColorApp,
+    cardColor: isDarkMode ? const Color(0xFF1A1A1A) : const Color(0xFFFFFFFF),
     textTheme: const TextTheme(
       // Para el título principal "Historial"
       headlineMedium: TextStyle(
@@ -60,13 +62,12 @@ ThemeData appTheme(bool isDarkMode) {
       // Para los descuentos y para el estado del pedido "Presentado"
       labelMedium: TextStyle(
         fontSize: 16,
-        color: Colors.green,
         fontWeight: FontWeight.w500,
       ),
       // Para los precios descontados
       labelSmall: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
       ),
       // Para el total de los artículos y otros totales
       bodySmall: TextStyle(

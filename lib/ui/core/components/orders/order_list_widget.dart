@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orders_app/domain/entities/order.dart';
-import 'package:orders_app/ui/core/components/order_list_item_widget.dart';
+import 'package:orders_app/ui/core/components/orders/order_list_item_widget.dart';
 
 /// Definimos el ancho maximo de cada celda
 const double _kCellWidth = 450.0;
@@ -45,24 +45,13 @@ class _OrderListWidgetState extends State<OrderListWidget> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: columnCount,
             crossAxisSpacing: _kCellSpacing,
-            mainAxisSpacing: columnCount == 1 ? 0 : _kCellSpacing,
+            mainAxisSpacing: 0,
             mainAxisExtent: 126,
           ),
           itemCount: _orders.length,
           itemBuilder: (context, index) {
             final order = _orders[index];
-            return Column(
-              children: [
-                Flexible(child: OrderListItemWidget(order: order)),
-                Divider(
-                  height: 20,
-                  thickness: 2,
-                  indent: 16,
-                  endIndent: 16,
-                  color: Colors.grey.withOpacity(0.2),
-                ),
-              ],
-            );
+            return OrderListItemWidget(order: order);
           },
         );
       },

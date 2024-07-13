@@ -1,9 +1,18 @@
+import 'package:intl/intl.dart';
+
 extension DateTimeExtension on DateTime {
   /// Texto de mes y día.
   ///
   /// formato: "Abr 12", "Ene 12"...
   String get monthAndDayText {
     return "${monthText.substring(0, 3)} $day";
+  }
+
+  /// Texto de mes, día y hora.
+  ///
+  /// formato: "Abr 12 a las 11:32 AM", "Ene 12 a las 11:32 AM""...
+  String get monthDayAndHourText {
+    return "$monthAndDayText a las ${DateFormat.jm().format(this)}";
   }
 
   /// Texto del mes

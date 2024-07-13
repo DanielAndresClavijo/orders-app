@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orders_app/domain/entities/order.dart';
 import 'package:orders_app/injector/injector_providers.dart';
-import 'package:orders_app/ui/core/components/product_list_widget.dart';
+import 'package:orders_app/ui/core/components/orders/order_list_widget.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 class OrderListPage extends ConsumerStatefulWidget {
@@ -52,8 +52,10 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
             maxWidth: 940,
           ),
           child: Card(
+            color: context.theme.cardColor,
+            surfaceTintColor: Colors.transparent,
+            shadowColor: Colors.transparent,
             clipBehavior: Clip.antiAlias,
-            color: Colors.white,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

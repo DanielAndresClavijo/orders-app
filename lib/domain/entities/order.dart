@@ -80,13 +80,31 @@ class Order {
 
   Map<String, dynamic> toJson() => _$OrderToJson(this);
 
-  /// Precio de todos los productos del pedido con descuento [priceWithDiscount]
-  double get priceWithDiscount {
+  /// Precio de todos los productos del pedido SIN descuento.
+  double get totalProductPrice {
     double price = 0;
     for (var product in products) {
-      final priceDiscount = product.price * product.count * product.discount;
-      final priceTotal = product.price * product.count;
-      price += (priceTotal - priceDiscount);
+      price += product.totalPrice;
+    }
+
+    return price;
+  }
+
+  /// Precio de todos los productos del pedido SIN descuento.
+  double get totalProductPriceDiscount {
+    double price = 0;
+    for (var product in products) {
+      price += product.totalPriceDiscount;
+    }
+
+    return price;
+  }
+
+  /// Precio de todos los productos del pedido con descuento.
+  double get totalProductPriceWithDiscount {
+    double price = 0;
+    for (var product in products) {
+      price += product.totalPriceWithDiscount;
     }
 
     return price;
@@ -95,10 +113,10 @@ class Order {
   /// El precio total del pedido.
   ///
   /// Incluye:
-  ///  - El precio de todos los productos con descuento [priceWithDiscount]
+  ///  - El precio de todos los productos con descuento [totalProductPriceWithDiscount]
   ///  - El precio del evnío [shipment]
   ///  - La propina [tip]
-  double get totalPrice => priceWithDiscount + shipment + tip;
+  double get totalPrice => totalProductPriceWithDiscount + shipment + tip;
 
   /// El pedido es de tipo PromoLive [OrderType.promo]
   bool get isPromo => type == OrderType.promo;
