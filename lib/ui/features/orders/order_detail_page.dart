@@ -6,6 +6,7 @@ import 'package:orders_app/domain/entities/order.dart';
 import 'package:orders_app/injector/injector_providers.dart';
 import 'package:orders_app/ui/core/components/orders/details/direct_type_widget.dart';
 import 'package:orders_app/ui/core/components/orders/details/promo_type_widget.dart';
+import 'package:orders_app/ui/core/constants_app.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 import 'package:orders_app/ui/core/extensions/date_time_extension.dart';
 import 'package:orders_app/ui/core/extensions/order_extension.dart';
@@ -73,7 +74,7 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
         child: Container(
           padding: const EdgeInsets.only(bottom: 16),
           constraints: const BoxConstraints(
-            maxWidth: 940,
+            maxWidth: kWidthPage,
           ),
           child: Column(
             children: [

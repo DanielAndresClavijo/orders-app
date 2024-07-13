@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orders_app/domain/entities/order.dart';
 import 'package:orders_app/injector/injector_providers.dart';
 import 'package:orders_app/ui/core/components/orders/list/order_list_widget.dart';
+import 'package:orders_app/ui/core/constants_app.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 /// Página donde se listan las ordenes.
@@ -51,7 +52,7 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(
               minWidth: 0,
-              maxWidth: 940,
+              maxWidth: kWidthPage,
             ),
             child: Card(
               color: context.theme.cardColor,

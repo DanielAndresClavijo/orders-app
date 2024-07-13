@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:orders_app/config/navigation_history.dart';
 import 'package:orders_app/ui/core/components/buttons/back_button.dart';
 import 'package:orders_app/ui/core/components/buttons/menu_wrapper_button.dart';
+import 'package:orders_app/ui/core/constants_app.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 /// Origen de la página del pedido
@@ -28,26 +29,32 @@ class AuthorizedBasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 56,
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 0, 8),
-          child: BackButtonWidget(
-            onBack: () {
-              context.go(navigationHistory.popPath);
-            },
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 8, 16, 8),
-            child: MenuWrapperButtonWidget(onWrap: () {}),
-          ),
-        ],
+        leadingWidth: 0,
         title: Center(
-          child: Text(
-            "Historial",
-            style: context.font.headlineMedium,
-            overflow: TextOverflow.ellipsis,
+          child: SizedBox(
+            width: kWidthPage,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: BackButtonWidget(
+                    onBack: () {
+                      context.go(navigationHistory.popPath);
+                    },
+                  ),
+                ),
+                Text(
+                  "Historial",
+                  style: context.font.headlineMedium,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: MenuWrapperButtonWidget(onWrap: () {}),
+                ),
+              ],
+            ),
           ),
         ),
       ),
