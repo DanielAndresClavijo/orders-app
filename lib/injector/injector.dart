@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:orders_app/config/app_config.dart';
+import 'package:orders_app/config/navigation_history.dart';
 import 'package:orders_app/data/datasources/auth_datasource.dart';
 import 'package:orders_app/data/datasources/local/auth_local_datasource.dart';
 import 'package:orders_app/data/datasources/local/orders_local_datasource.dart';
@@ -13,7 +14,6 @@ import 'package:orders_app/domain/repositories/auth_repository.dart';
 import 'package:orders_app/domain/repositories/orders_repository.dart';
 import 'package:orders_app/domain/usecases/auth_use_case.dart';
 import 'package:orders_app/domain/usecases/orders_use_case.dart';
-import 'package:orders_app/ui/core/components/navigation_history.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Injector {

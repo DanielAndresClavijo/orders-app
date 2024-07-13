@@ -4,11 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:orders_app/config/assets.dart';
 import 'package:orders_app/domain/entities/order.dart';
 import 'package:orders_app/injector/injector_providers.dart';
-import 'package:orders_app/ui/core/components/orders/product_order_item_widget.dart';
+import 'package:orders_app/ui/core/components/orders/details/direct_type_widget.dart';
+import 'package:orders_app/ui/core/components/orders/details/promo_type_widget.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 import 'package:orders_app/ui/core/extensions/date_time_extension.dart';
 import 'package:orders_app/ui/core/extensions/order_extension.dart';
 
+/// Página que muestra los detalles de algún pedido, según [orderId].
 class OrderDetailPage extends ConsumerStatefulWidget {
   final int orderId;
 
@@ -68,7 +70,8 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
       body: Container(
         alignment: Alignment.topCenter,
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ConstrainedBox(
+        child: Container(
+          padding: const EdgeInsets.only(bottom: 16),
           constraints: const BoxConstraints(
             maxWidth: 940,
           ),
@@ -77,16 +80,19 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.yellow,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 height: 180,
               ),
               const SizedBox(height: 16),
               Flexible(
-                child: Card(
+                child: Material(
                   color: context.theme.cardColor,
                   surfaceTintColor: Colors.transparent,
                   shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -114,20 +120,22 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
                           ),
                           style: context.font.labelSmall,
                         ),
-                        Text.rich(
-                          TextSpan(
-                            text: "",
-                            children: [
-                              const WidgetSpan(
-                                child: Icon(Icons.location_on_outlined),
-                              ),
-                              const TextSpan(text: " "),
-                              TextSpan(
-                                  text: _order!.updatedAt.monthDayAndHourText),
-                            ],
+                        if (!_order!.isPromo)
+                          Text.rich(
+                            TextSpan(
+                              text: "",
+                              children: [
+                                const WidgetSpan(
+                                  child: Icon(Icons.location_on_outlined),
+                                ),
+                                const TextSpan(text: " "),
+                                TextSpan(
+                                    text:
+                                        _order!.updatedAt.monthDayAndHourText),
+                              ],
+                            ),
+                            style: context.font.labelSmall,
                           ),
-                          style: context.font.labelSmall,
-                        ),
                         const SizedBox(height: 32),
                         Text(
                           "Tu pedido",
@@ -141,35 +149,10 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                for (var product in _order!.products)
-                                  SizedBox(
-                                    height: 56,
-                                    child: ProductOrderItemWidget(
-                                        productOrder: product),
-                                  ),
-                                const SizedBox(height: 32),
-                                _buildPriceResume(
-                                  labelDescription: "Total de los artículos",
-                                  price: _order!.totalProductPrice
-                                      .toStringAsFixed(2),
-                                ),
-                                _buildPriceResume(
-                                  labelDescription: "Descuentos",
-                                  price: _order!.totalProductPriceDiscount
-                                      .toStringAsFixed(2),
-                                ),
-                                _buildPriceResume(
-                                  labelDescription: "Envío",
-                                  price: _order!.shipment.toStringAsFixed(2),
-                                ),
-                                _buildPriceResume(
-                                  labelDescription: "Propina",
-                                  price: _order!.tip.toStringAsFixed(2),
-                                ),
-                                _buildPriceResume(
-                                  labelDescription: "Total pagado",
-                                  price: _order!.totalPrice.toStringAsFixed(2),
-                                ),
+                                if (_order!.isPromo)
+                                  PromoTypeWidget(order: _order!)
+                                else
+                                  DirectTypeWidget(order: _order!),
                                 const SizedBox(height: 16),
                                 Divider(
                                   height: 2,
@@ -177,10 +160,12 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
                                   color: Colors.grey.withOpacity(0.2),
                                 ),
                                 const SizedBox(height: 32),
-                                Flexible(
+                                SizedBox(
+                                  width: context.screenSize.width,
                                   child: Wrap(
                                     spacing: 8,
-                                    alignment: WrapAlignment.start,
+                                    runSpacing: 8,
+                                    alignment: WrapAlignment.spaceBetween,
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,
                                     runAlignment: WrapAlignment.spaceBetween,
@@ -191,11 +176,14 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          SvgPicture.asset(
-                                            _order!.paymentMethod ==
-                                                    PaymentMethod.visa
-                                                ? Assets.visaLogo
-                                                : Assets.mastercardLogo,
+                                          SizedBox.square(
+                                            dimension: 48,
+                                            child: SvgPicture.asset(
+                                              _order!.paymentMethod ==
+                                                      PaymentMethod.visa
+                                                  ? Assets.visaLogo
+                                                  : Assets.mastercardLogo,
+                                            ),
                                           ),
                                           const SizedBox(width: 8),
                                           const Flexible(
@@ -224,6 +212,16 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
                                 const SizedBox(height: 32),
                                 OutlinedButton(
                                   onPressed: () {},
+                                  style: ButtonStyle(
+                                    foregroundColor: WidgetStatePropertyAll(
+                                      context.color.onSurface,
+                                    ),
+                                    overlayColor: WidgetStatePropertyAll(
+                                      context.color.onSurface.withOpacity(
+                                        0.2,
+                                      ),
+                                    ),
+                                  ),
                                   child: const Center(
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -236,6 +234,16 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
                                 const SizedBox(height: 8),
                                 OutlinedButton(
                                   onPressed: () {},
+                                  style: ButtonStyle(
+                                    foregroundColor: WidgetStatePropertyAll(
+                                      context.color.onSurface,
+                                    ),
+                                    overlayColor: WidgetStatePropertyAll(
+                                      context.color.onSurface.withOpacity(
+                                        0.2,
+                                      ),
+                                    ),
+                                  ),
                                   child: const Center(
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
@@ -258,24 +266,6 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildPriceResume({
-    required String labelDescription,
-    required String price,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          child: Text(
-            labelDescription,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        Text("\$$price"),
-      ],
     );
   }
 }

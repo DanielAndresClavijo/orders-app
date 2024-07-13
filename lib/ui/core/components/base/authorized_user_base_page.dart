@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:orders_app/config/navigation_history.dart';
 import 'package:orders_app/ui/core/components/buttons/back_button.dart';
 import 'package:orders_app/ui/core/components/buttons/menu_wrapper_button.dart';
-import 'package:orders_app/ui/core/components/navigation_history.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 /// Origen de la página del pedido

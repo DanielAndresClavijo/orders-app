@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:orders_app/config/navigation_history.dart';
 import 'package:orders_app/config/router/common_router.dart';
 import 'package:orders_app/ui/core/components/base/authorized_user_base_page.dart';
-import 'package:orders_app/ui/core/components/navigation_history.dart';
 import 'package:orders_app/ui/features/orders/order_detail_page.dart';
 import 'package:orders_app/ui/features/orders/order_list_page.dart';
 

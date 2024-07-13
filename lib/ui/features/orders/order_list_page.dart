@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orders_app/domain/entities/order.dart';
 import 'package:orders_app/injector/injector_providers.dart';
-import 'package:orders_app/ui/core/components/orders/order_list_widget.dart';
+import 'package:orders_app/ui/core/components/orders/list/order_list_widget.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
+/// Página donde se listan las ordenes.
 class OrderListPage extends ConsumerStatefulWidget {
   const OrderListPage({
     super.key,
@@ -43,33 +44,35 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
         ),
       );
     }
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            minWidth: 0,
-            maxWidth: 940,
-          ),
-          child: Card(
-            color: context.theme.cardColor,
-            surfaceTintColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                  child: Text(
-                    "Pedidos anteriores",
-                    style: context.font.titleMedium,
-                    textAlign: TextAlign.left,
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minWidth: 0,
+              maxWidth: 940,
+            ),
+            child: Card(
+              color: context.theme.cardColor,
+              surfaceTintColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                    child: Text(
+                      "Pedidos anteriores",
+                      style: context.font.titleMedium,
+                      textAlign: TextAlign.left,
+                    ),
                   ),
-                ),
-                Flexible(child: OrderListWidget(orders: _orders)),
-              ],
+                  Flexible(child: OrderListWidget(orders: _orders)),
+                ],
+              ),
             ),
           ),
         ),

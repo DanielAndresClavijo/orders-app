@@ -7,6 +7,7 @@ import 'package:orders_app/ui/core/extensions/context_extension.dart';
 import 'package:orders_app/ui/core/extensions/date_time_extension.dart';
 import 'package:orders_app/ui/core/extensions/order_extension.dart';
 
+/// Widget que representa cada item de la lista de pedidos.
 class OrderListItemWidget extends StatelessWidget {
   final Order order;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orders_app/domain/entities/order.dart';
-import 'package:orders_app/ui/core/components/orders/order_list_item_widget.dart';
+import 'package:orders_app/ui/core/components/orders/list/order_list_item_widget.dart';
 
 /// Definimos el ancho maximo de cada celda
 const double _kCellWidth = 450.0;
