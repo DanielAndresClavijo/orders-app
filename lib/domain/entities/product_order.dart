@@ -9,6 +9,8 @@ class ProductOrder {
   final int id;
 
   /// Fecha de creacion.
+
+  @JsonKey(name: "created_at")
   final DateTime createdAt;
 
   /// Nombre del producto.
@@ -26,6 +28,7 @@ class ProductOrder {
   final int count;
 
   /// Id que relaciona este producto con un pedido.
+  @JsonKey(name: "order_id")
   final int orderId;
 
   const ProductOrder({

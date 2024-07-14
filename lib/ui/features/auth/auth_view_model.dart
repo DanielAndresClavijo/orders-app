@@ -27,13 +27,21 @@ class AuthViewModelState {
 }
 
 class AuthViewModel extends StateNotifier<AuthViewModelState> {
-  final AuthUseCase authUseCase;
-  final ProviderContainer providerContainer;
+  final AuthUseCase _authUseCase;
+  final ProviderContainer _providerContainer;
 
   AuthViewModel({
-    required this.authUseCase,
-    required this.providerContainer,
-  }) : super(const AuthViewModelState());
+    required AuthUseCase authUseCase,
+    required ProviderContainer providerContainer,
+  })  : _providerContainer = providerContainer,
+        _authUseCase = authUseCase,
+        super(const AuthViewModelState());
+
+  /// Comprueba si existe una sesion activa.
+  bool checkUserSession() {
+    final user = _authUseCase.checkSession();
+    return user != null;
+  }
 
   /// Restaura las variables del estado a su estado inicial.
   void restoreVariable() {
@@ -46,22 +54,22 @@ class AuthViewModel extends StateNotifier<AuthViewModelState> {
   }) async {
     try {
       state = state.copyWith(loading: true);
-      final user = await authUseCase.onLogin(email: email, password: password);
+      final user = await _authUseCase.onLogin(email: email, password: password);
       if (user == null) {
-        providerContainer.read(appProvider.notifier).showAlert(
+        _providerContainer.read(appProvider.notifier).showAlert(
               message: "Credenciales invalidas.",
             );
 
         state = state.copyWith(loading: false);
         return Future.value(false);
       }
-      providerContainer.read(appProvider.notifier).showInfo(
+      _providerContainer.read(appProvider.notifier).showInfo(
             message: "Has iniciado sesión con exito.",
           );
       state = state.copyWith(email: null, pass: null, loading: false);
       return Future.value(true);
     } catch (e) {
-      providerContainer.read(appProvider.notifier).showError(
+      _providerContainer.read(appProvider.notifier).showError(
             message: "Ha ocurrido un error al intentar iniciar sesion, "
                 "intentalo de nuevo mas tarde.",
           );
@@ -74,25 +82,25 @@ class AuthViewModel extends StateNotifier<AuthViewModelState> {
       {required String email, required String password}) async {
     try {
       state = state.copyWith(loading: true);
-      final user = await authUseCase.onRegister(
+      final user = await _authUseCase.onRegister(
         email: email,
         password: password,
       );
       if (user == null) {
-        providerContainer.read(appProvider.notifier).showAlert(
+        _providerContainer.read(appProvider.notifier).showAlert(
               message: "Datos incorrectos.",
             );
         state = state.copyWith(loading: false);
         return Future.value(false);
       }
-      providerContainer.read(appProvider.notifier).showInfo(
+      _providerContainer.read(appProvider.notifier).showInfo(
             message: "Cuenta creada.",
           );
 
       state = state.copyWith(email: null, pass: null, loading: false);
       return Future.value(true);
     } catch (e) {
-      providerContainer.read(appProvider.notifier).showError(
+      _providerContainer.read(appProvider.notifier).showError(
             message: "Ha ocurrido un error con el registro, "
                 "intentalo de nuevo mas tarde.",
           );

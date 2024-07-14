@@ -22,9 +22,12 @@ class OrdersSupabaseDatasource extends OrdersDatasource {
 
   @override
   Future<List<Order>> getAll() async {
-    final response =
-        await client.from(orderTableName).select('*, product_order(*)');
-    print("OrdersSupabaseDatasource.getAll: $response");
+    final response = await client.rpc('get_orders_with_products');
+    if (response is! List) return Future.error("Not found");
+    print(response);
+    print("##############OrdersSupabaseDatasource.getAll###################");
+    response.map((e) => print(e));
+    print("##############OrdersSupabaseDatasource.getAll###################");
     final result = response.map((o) => Order.fromJson(o));
     return Future.value(result.toList());
   }

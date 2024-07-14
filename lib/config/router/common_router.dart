@@ -69,6 +69,11 @@ Future<String?> _redirect(
   if (state.uri.path.startsWith(kOrderBasePath) && userInSession == null) {
     return Future.value(kLoginPath);
   }
+  if ((state.uri.path.startsWith(kLoginPath) ||
+          state.uri.path.startsWith(kRegisterPath)) &&
+      userInSession != null) {
+    return Future.value(kOrdersListPath);
+  }
   return Future.value(null);
 }
 

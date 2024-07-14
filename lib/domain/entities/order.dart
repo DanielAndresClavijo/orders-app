@@ -26,12 +26,15 @@ class Order {
   final int id;
 
   /// Fecha de creación.
+  @JsonKey(name: "created_at")
   final DateTime createdAt;
 
   /// Fecha de actualización.
+  @JsonKey(name: "updated_at")
   final DateTime updatedAt;
 
   /// Nombre de la orden.
+  @JsonKey(name: "company_name")
   final String companyName;
 
   /// Dirección de envío de pedido.
@@ -53,13 +56,16 @@ class Order {
   final double shipment;
 
   /// Metodo de pago.
+  @JsonKey(name: "payment_method")
   final PaymentMethod? paymentMethod;
 
   /// Id de usuario relacionado.
+  @JsonKey(name: "user_id")
   final String uuid;
 
   /// Imagen del pedido.
-  final String imageId;
+  @JsonKey(name: "image_id")
+  final String? imageId;
 
   const Order({
     required this.id,
@@ -73,7 +79,7 @@ class Order {
     this.shipment = 0,
     this.paymentMethod,
     required this.uuid,
-    this.imageId = "",
+    this.imageId,
   }) : updatedAt = createdAt;
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);

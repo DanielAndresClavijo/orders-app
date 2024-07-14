@@ -22,8 +22,21 @@ class NavigationHistory {
   /// Retorna la penultima ruta del historia y elimina la ultima.
   String get popPath {
     if (_history.isNotEmpty) {
-      _history.removeLast();
-      return _history.lastOrNull ?? kHomePath;
+      final removedPath = _history.removeLast();
+      final starsWithLoginPath =
+          _history.lastOrNull?.startsWith(kLoginPath) ?? false;
+      final starsWithRegisterPath =
+          _history.lastOrNull?.startsWith(kRegisterPath) ?? false;
+      if ((starsWithLoginPath || starsWithRegisterPath) &&
+          removedPath.startsWith(kOrderBasePath)) {
+        _history.removeWhere(
+          (path) =>
+              path.startsWith(kLoginPath) || path.startsWith(kRegisterPath),
+        );
+      }
+      final destinationPath = _history.lastOrNull ?? kHomePath;
+      if (destinationPath == kSplashPath) return kHomePath;
+      return destinationPath;
     }
 
     return kHomePath;
