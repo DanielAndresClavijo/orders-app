@@ -12,9 +12,10 @@ class OrdersSupabaseDatasource extends OrdersDatasource {
   Future<Order?> get(int id) async {
     final response = await client
         .from(orderTableName)
-        .select('*, product_orders(*)')
+        .select('*, product_order(*)')
         .eq('id', id)
         .single();
+    print("OrdersSupabaseDatasource.get: $response");
     final foundedOrder = Order.fromJson(response);
     return Future.value(foundedOrder);
   }
@@ -22,7 +23,8 @@ class OrdersSupabaseDatasource extends OrdersDatasource {
   @override
   Future<List<Order>> getAll() async {
     final response =
-        await client.from(orderTableName).select('*, product_orders(*)');
+        await client.from(orderTableName).select('*, product_order(*)');
+    print("OrdersSupabaseDatasource.getAll: $response");
     final result = response.map((o) => Order.fromJson(o));
     return Future.value(result.toList());
   }

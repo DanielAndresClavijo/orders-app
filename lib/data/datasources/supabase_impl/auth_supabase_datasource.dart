@@ -8,14 +8,14 @@ class AuthSupabaseDatasource extends AuthDatasource {
   AuthSupabaseDatasource(this.client);
 
   @override
-  Future<User?> checkSession() async {
+  User? checkSession() {
     final response = client.auth.currentSession?.user;
 
     final newUser = response != null
         ? User(userId: response.id, email: response.email!)
         : null;
 
-    return Future.value(newUser);
+    return newUser;
   }
 
   @override

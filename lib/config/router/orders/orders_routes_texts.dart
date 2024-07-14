@@ -1,7 +1,10 @@
 part of 'orders_routes.dart';
 
 /// Path inicial para las rutas de pedidos.
-const String _kOrderBasePath = "/orders";
+///
+///
+///  __Ruta `/orders`__
+const String kOrderBasePath = "/orders";
 
 /// Sub-path para la ruta de listado de pedidos.
 ///
@@ -11,7 +14,7 @@ const String _kOrderListSubPath = "list";
 /// # Ruta para navegar al listado de pedidos.
 ///
 ///  __Ruta `/orders/list`__
-const String kOrdersListPath = "$_kOrderBasePath/$_kOrderListSubPath";
+const String kOrdersListPath = "$kOrderBasePath/$_kOrderListSubPath";
 
 /// # Nombre de Ruta para navegar al listado de pedidos.
 ///
@@ -32,7 +35,7 @@ const String _kOrderDetailSubPath = "detail";
 ///  de `/`. Ej: `orders/detail/123`
 ///
 ///  __Ruta `/orders/detail`__
-const String kOrderDetailPath = "$_kOrderBasePath/$_kOrderDetailSubPath";
+const String kOrderDetailPath = "$kOrderBasePath/$_kOrderDetailSubPath";
 
 /// # Nombre de Ruta para navegar al detalle de algun pedido.
 ///

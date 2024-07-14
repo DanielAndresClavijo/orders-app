@@ -6,7 +6,7 @@ import 'package:orders_app/domain/entities/user.dart';
 ///
 ///  Nota: Utilizarla solo desde los repositorios.
 abstract class AuthDatasource {
-  Future<User?> checkSession();
+  User? checkSession();
 
   /// Autoriza a un usuario por [email] y [password]
   Future<User?> onLogin({required String email, required String password});

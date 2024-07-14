@@ -21,13 +21,21 @@ class AppWrapper extends ConsumerWidget {
 
   /// Configura la snack-bar para las notificaciones de la app.
   void _setupSnackBar(WidgetRef ref) {
-    final notification = ref.watch(appNotifierProvider);
+    final notification = ref.watch(appProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (notification != null) {
         ScaffoldMessenger.of(ref.context).showSnackBar(
           SnackBar(
-            content: Text(notification.message),
+            content: Text(
+              notification.message,
+              style: ref.context.font.bodyMedium?.copyWith(
+                color: _getTextColor(
+                  ref.context,
+                  notification.type,
+                ),
+              ),
+            ),
             backgroundColor: _getBackgroundColor(
               ref.context,
               notification.type,
@@ -35,9 +43,21 @@ class AppWrapper extends ConsumerWidget {
           ),
         );
 
-        ref.read(appNotifierProvider.notifier).clear();
+        ref.read(appProvider.notifier).clear();
       }
     });
+  }
+
+  Color _getTextColor(BuildContext context, NotificationType type) {
+    switch (type) {
+      case NotificationType.error:
+        return context.color.onError;
+      case NotificationType.alert:
+        return context.color.onSecondaryContainer;
+      case NotificationType.info:
+      default:
+        return context.color.onSecondary;
+    }
   }
 
   Color _getBackgroundColor(BuildContext context, NotificationType type) {

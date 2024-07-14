@@ -48,7 +48,7 @@ class OrdersRoutes {
     final GoRoute ordersListRoute = _buildOrdersListRoute();
     final GoRoute orderDetailRoute = _buildOrderDetailRoute();
     return GoRoute(
-      path: _kOrderBasePath,
+      path: kOrderBasePath,
       builder: (context, state) => const Center(),
       routes: [
         ordersListRoute,

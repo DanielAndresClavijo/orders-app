@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
 
 class ElevatedBaseButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget child;
 
   const ElevatedBaseButton({
     super.key,
-    required this.onPressed,
+    this.onPressed,
     required this.child,
   });
 
@@ -23,7 +23,7 @@ class ElevatedBaseButton extends StatelessWidget {
           context.color.surface,
         ),
         backgroundColor: WidgetStatePropertyAll(
-          context.color.onSurface,
+          onPressed == null ? Colors.grey : context.color.onSurface,
         ),
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(

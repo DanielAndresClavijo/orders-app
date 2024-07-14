@@ -24,9 +24,10 @@ class OrderListViewModel extends StateNotifier<OrderListViewModelState> {
   final OrdersUseCase ordersUseCase;
   final ProviderContainer providerContainer;
 
-  OrderListViewModel(
-      {required this.ordersUseCase, required this.providerContainer, required})
-      : super(const OrderListViewModelState(orders: []));
+  OrderListViewModel({
+    required this.ordersUseCase,
+    required this.providerContainer,
+  }) : super(const OrderListViewModelState(orders: []));
 
   Future<void> getOrders() async {
     try {
@@ -50,7 +51,7 @@ class OrderListViewModel extends StateNotifier<OrderListViewModelState> {
   }
 
   void _onError(String error) {
-    providerContainer.read(appNotifierProvider.notifier).showError(
+    providerContainer.read(appProvider.notifier).showError(
           message: error,
         );
   }

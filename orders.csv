@@ -1,0 +1,12 @@
+id,created_at,company_name,address,user_id,shipment,tip,status,type,payment_method,products
+1,2024-06-10 16:55:00,Habibi,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",60,13,completed,direct,visa,[1, 2, 3]
+2,2024-06-10 16:55:00,Boston's Pizza,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",16,10,noShow,promo,visa,[4, 5, 6]
+3,2024-06-10 16:55:00,Tabom,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",5,0,completed,promo,visa,[7, 8]
+4,2024-06-10 16:55:00,Roca,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",12,12,completed,direct,mastercard,[9, 10]
+5,2024-06-10 16:55:00,Habibi,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",25,10,cancelled,direct,visa,[11]
+6,2024-06-10 16:55:00,Habibi,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",10,25,completed,direct,mastercard,[12, 8]
+7,2024-06-10 16:55:00,Habibi,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",16,5,completed,promo,visa,[13, 8]
+8,2024-06-10 16:55:00,Habibi,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",5,0,completed,promo,visa,[8]
+9,2024-06-11 16:55:00,Boston's Pizza,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",14,5,pending,direct,visa,[14, 15]
+10,2024-06-12 16:55:00,Habibi,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",15,50,cancelled,direct,visa,[16, 17]
+11,2024-06-13 16:55:00,Habibi,Benito Juárez #231,"e11fed97-375d-4421-8243-793eb8dfe9ea",30,1,completed,promo,visa,[18, 19]

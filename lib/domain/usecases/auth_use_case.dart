@@ -3,7 +3,7 @@ import 'package:orders_app/domain/repositories/auth_repository.dart';
 
 abstract class AuthUseCase {
   /// Comprueba si hay alguna session activa.
-  Future<User?> checkSession();
+  User? checkSession();
 
   /// Autoriza a un usuario por [email] y [password]
   Future<User?> onLogin({required String email, required String password});
@@ -24,13 +24,13 @@ class AuthUseCaseImpl extends AuthUseCase {
   AuthUseCaseImpl(this.repository);
 
   @override
-  Future<User?> checkSession() async {
+  User? checkSession() {
     try {
-      final result = await repository.checkSession();
+      final result = repository.checkSession();
       _currentUser = result;
-      return Future.value(result);
+      return result;
     } catch (e) {
-      return Future.error(e);
+      return null;
     }
   }
 

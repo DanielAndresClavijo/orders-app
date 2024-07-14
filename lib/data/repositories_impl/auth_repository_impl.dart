@@ -8,12 +8,12 @@ class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl(this.datasource);
 
   @override
-  Future<User?> checkSession() async {
+  User? checkSession() {
     try {
-      final result = await datasource.checkSession();
-      return Future.value(result);
+      final result = datasource.checkSession();
+      return result;
     } catch (e) {
-      return Future.error(e);
+      rethrow;
     }
   }
 

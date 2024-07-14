@@ -5,8 +5,8 @@ import 'package:orders_app/domain/entities/user.dart';
 
 class AuthLocalDatasource extends AuthDatasource {
   @override
-  Future<User?> checkSession() {
-    return Future.value(null);
+  User? checkSession() {
+    return _userInSession;
   }
 
   @override
@@ -15,6 +15,8 @@ class AuthLocalDatasource extends AuthDatasource {
     required String password,
   }) async {
     final loguedUser = _usersMock.where((u) => u.email == email).firstOrNull;
+
+    _userInSession = loguedUser;
     return loguedUser;
   }
 
@@ -29,15 +31,18 @@ class AuthLocalDatasource extends AuthDatasource {
     final userId = Random(email.length).nextInt(1000).toString();
     final newUser = User(userId: userId, email: email);
     _usersMock.add(newUser);
+    _userInSession = newUser;
     return newUser;
   }
 
   @override
   Future<bool> onLogout() async {
+    _userInSession = null;
     return Future.value(true);
   }
 }
 
+User? _userInSession = _usersMock.firstOrNull;
 List<User> _usersMock = [
   const User(userId: "1", email: "example@email.com"),
 ];

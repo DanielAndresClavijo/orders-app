@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:orders_app/data/datasources/orders_datasource.dart';
 import 'package:orders_app/domain/entities/order.dart';
 import 'package:orders_app/domain/repositories/orders_repository.dart';
@@ -13,6 +14,7 @@ class OrdersRepositoryImpl extends OrdersRepository {
       final result = await datasource.get(id);
       return Future.value(result);
     } catch (e) {
+      debugPrint("Error OrdersRepositoryImpl.get: $e");
       return Future.error(e);
     }
   }
@@ -23,6 +25,7 @@ class OrdersRepositoryImpl extends OrdersRepository {
       final result = await datasource.getAll();
       return Future.value(result);
     } catch (e) {
+      debugPrint("Error OrdersRepositoryImpl.getAll: $e");
       return Future.error(e);
     }
   }

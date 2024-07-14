@@ -5,6 +5,7 @@ import 'package:orders_app/config/navigation_history.dart';
 import 'package:orders_app/config/router/auth/auth_routes.dart';
 import 'package:orders_app/config/router/orders/orders_routes.dart';
 import 'package:orders_app/config/router/welcome/welcome_routes.dart';
+import 'package:orders_app/domain/usecases/auth_use_case.dart';
 import 'package:orders_app/ui/core/components/base/unauthorized_user_base_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
@@ -14,7 +15,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
 
 final _getIt = GetIt.instance;
 
-/// Enrutador para las paginas de la aplicacion.
+/// Enrutador para las páginas de la aplicacion.
 class CommonRouter {
   final GoRouter router;
 
@@ -22,6 +23,7 @@ class CommonRouter {
 
   factory CommonRouter() {
     final navigationHistory = _getIt<NavigationHistory>();
+    final authUseCase = _getIt<AuthUseCase>();
     final AuthRoutes authRoutes = AuthRoutes();
     final WelcomeRoutes welcomeRoutes = WelcomeRoutes();
     final OrdersRoutes ordersRoutes = OrdersRoutes(navigationHistory);
@@ -31,7 +33,7 @@ class CommonRouter {
       initialLocation: welcomeRoutes.splashRoute.path,
       debugLogDiagnostics: true,
       redirect: (context, state) {
-        return _redirect(context, state, navigationHistory);
+        return _redirect(context, state, navigationHistory, authUseCase);
       },
       routes: [
         welcomeRoutes.splashRoute,
@@ -60,8 +62,13 @@ Future<String?> _redirect(
   BuildContext context,
   GoRouterState state,
   NavigationHistory navigationHistory,
+  AuthUseCase authUseCase,
 ) {
   navigationHistory.push(state.uri.path);
+  final userInSession = authUseCase.checkSession();
+  if (state.uri.path.startsWith(kOrderBasePath) && userInSession == null) {
+    return Future.value(kLoginPath);
+  }
   return Future.value(null);
 }
 

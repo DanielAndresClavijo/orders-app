@@ -39,9 +39,13 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
   Widget _buildContent() {
     if (_orders.isEmpty) {
       return Center(
-        child: Text(
-          "Nada que ver",
-          style: context.font.displayLarge,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            "Nada que mostrar",
+            style: context.font.headlineLarge,
+            textAlign: TextAlign.center,
+          ),
         ),
       );
     }
