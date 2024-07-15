@@ -27,7 +27,7 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(orderListNotifierProvider.notifier).getOrders(
             nextPage: 1,
-            showItemCount: kPageCount.first,
+            showItemCount: kPageSize.first,
           );
     });
   }
@@ -56,16 +56,18 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(16),
           child: ConstrainedBox(
             constraints: const BoxConstraints(
               minWidth: 0,
               maxWidth: kWidthPage,
             ),
-            child: Card(
+            child: Material(
               color: context.theme.cardColor,
               surfaceTintColor: Colors.transparent,
-              shadowColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               clipBehavior: Clip.antiAlias,
               child: Column(
                 mainAxisSize: MainAxisSize.min,

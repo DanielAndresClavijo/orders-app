@@ -37,6 +37,8 @@ class AuthViewModel extends StateNotifier<AuthViewModelState> {
         _authUseCase = authUseCase,
         super(const AuthViewModelState());
 
+  String? getUserEmail() => _authUseCase.currentUser?.email;
+
   /// Comprueba si existe una sesion activa.
   bool checkUserSession() {
     final user = _authUseCase.checkSession();
@@ -107,6 +109,10 @@ class AuthViewModel extends StateNotifier<AuthViewModelState> {
       state = state.copyWith(loading: false);
       return Future.value(false);
     }
+  }
+
+  void onLogOut() async {
+    await _authUseCase.onLogout();
   }
 
   void onChangeEmailText(String email) {

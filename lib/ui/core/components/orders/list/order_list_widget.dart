@@ -9,27 +9,13 @@ const double _kCellWidth = 450.0;
 const double _kCellSpacing = 16.0;
 
 /// Widget para pintar los items de los pedidos en una lista desplazable.
-class OrderListWidget extends StatefulWidget {
+class OrderListWidget extends StatelessWidget {
   final List<Order> orders;
 
   const OrderListWidget({
     super.key,
     required this.orders,
   });
-
-  @override
-  State<OrderListWidget> createState() => _OrderListWidgetState();
-}
-
-class _OrderListWidgetState extends State<OrderListWidget> {
-  final scrollController = ScrollController();
-  List<Order> _orders = [];
-
-  @override
-  void initState() {
-    _orders = widget.orders;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +27,16 @@ class _OrderListWidgetState extends State<OrderListWidget> {
         int columnCount = _calculateColumnCount(constraints.maxWidth);
 
         return GridView.builder(
-          controller: scrollController,
+          controller: ScrollController(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: columnCount,
             crossAxisSpacing: _kCellSpacing,
             mainAxisSpacing: 0,
             mainAxisExtent: 126,
           ),
-          itemCount: _orders.length,
+          itemCount: orders.length,
           itemBuilder: (context, index) {
-            final order = _orders[index];
+            final order = orders[index];
             return OrderListItemWidget(order: order);
           },
         );

@@ -4,19 +4,7 @@ import 'package:orders_app/domain/entities/order.dart';
 
 extension OrderExtension on Order {
   /// Texto para el estado de pedido.
-  String get typeOrderText {
-    switch (status) {
-      case OrderStatus.pending:
-        return "Pendiente";
-      case OrderStatus.cancelled:
-        return "Cancelado";
-      case OrderStatus.completed:
-        return "Completado";
-      case OrderStatus.noShow:
-      default:
-        return "No presentado";
-    }
-  }
+  String get typeOrderText => status.text;
 
   /// Obtiene el texto para el asset SVG del ícono del promo del pedido.
   String get assetOrderTypeIconText {
