@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:orders_app/config/app_config.dart';
 import 'package:orders_app/config/theme.dart';
 import 'package:orders_app/domain/usecases/auth_use_case.dart';
 import 'package:orders_app/domain/usecases/orders_use_case.dart';
@@ -19,6 +20,8 @@ final orderListNotifierProvider =
     return OrderListViewModel(
       ordersUseCase: _getIt<OrdersUseCase>(),
       providerContainer: _getIt<ProviderContainer>(),
+      baseStorageUrl:
+          "${_getIt<AppConfig>().supabaseUrl}/storage/v1/object/public/product%20image/",
     );
   },
 );

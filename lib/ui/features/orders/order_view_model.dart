@@ -57,17 +57,24 @@ class OrderListViewModelState {
 class OrderListViewModel extends StateNotifier<OrderListViewModelState> {
   final OrdersUseCase ordersUseCase;
   final ProviderContainer providerContainer;
+  final String _baseStorageUrl;
 
   OrderListViewModel({
     required this.ordersUseCase,
     required this.providerContainer,
-  }) : super(OrderListViewModelState(
+    required String baseStorageUrl,
+  })  : _baseStorageUrl = baseStorageUrl,
+        super(OrderListViewModelState(
           currentPageFilter: 1,
           pageSizeFilter: kPageSize.first,
           totalPage: 1,
           totalOrders: 0,
           orders: [],
         ));
+
+  String getOrderPublicUrl(String imageUrl) {
+    return "$_baseStorageUrl$imageUrl";
+  }
 
   Future<void> getOrders({
     required final int nextPage,

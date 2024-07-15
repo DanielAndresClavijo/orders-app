@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:orders_app/config/assets.dart';
 import 'package:orders_app/config/router/orders/orders_routes.dart';
 import 'package:orders_app/domain/entities/order.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
@@ -10,10 +11,12 @@ import 'package:orders_app/ui/core/extensions/order_extension.dart';
 /// Widget que representa cada item de la lista de pedidos.
 class OrderListItemWidget extends StatelessWidget {
   final Order order;
+  final String imageUrl;
 
   const OrderListItemWidget({
     super.key,
     required this.order,
+    required this.imageUrl,
   });
 
   @override
@@ -35,7 +38,18 @@ class OrderListItemWidget extends StatelessWidget {
                       child: Container(
                         width: 60,
                         height: 60,
-                        color: Colors.yellow,
+                        color: Colors.grey,
+                        child: Image.network(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                          width: 60,
+                          errorBuilder: (context, error, stackTrace) {
+                            return SvgPicture.asset(
+                              Assets.staticOrderImage,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        ),
                       ),
                     ),
                     const SizedBox(width: 16),

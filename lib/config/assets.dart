@@ -7,4 +7,6 @@ class Assets {
   static const String promoLiveIcon = 'assets/images/promo_live_icon.svg';
   static const String lineRoundedConnectIcon =
       'assets/images/line_rounded_connect_icon.svg';
+
+  static String staticOrderImage = "assets/images/habibi.jpg";
 }

@@ -8,7 +8,26 @@ part 'order.g.dart';
 ///   - [cancelled] Pedido cancelado
 ///   - [completed] Pedido pagado y enviado
 ///   - [pending] Pedido pendiente en confirmar
-enum OrderStatus { cancelled, completed, pending, noShow }
+enum OrderStatus {
+  cancelled,
+  completed,
+  pending,
+  noShow;
+
+  String get text {
+    switch (this) {
+      case OrderStatus.pending:
+        return "Pendiente";
+      case OrderStatus.cancelled:
+        return "Cancelado";
+      case OrderStatus.completed:
+        return "Completado";
+      case OrderStatus.noShow:
+      default:
+        return "No presentado";
+    }
+  }
+}
 
 /// Tipo de pedido.
 ///

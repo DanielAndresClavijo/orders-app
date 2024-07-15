@@ -2,6 +2,9 @@ import 'package:orders_app/domain/entities/user.dart';
 import 'package:orders_app/domain/repositories/auth_repository.dart';
 
 abstract class AuthUseCase {
+  /// Usuario con sesion activa.
+  User? currentUser;
+
   /// Comprueba si hay alguna session activa.
   User? checkSession();
 
@@ -19,6 +22,7 @@ class AuthUseCaseImpl extends AuthUseCase {
   final AuthRepository repository;
   User? _currentUser;
 
+  @override
   User? get currentUser => _currentUser;
 
   AuthUseCaseImpl(this.repository);

@@ -11,10 +11,12 @@ const double _kCellSpacing = 16.0;
 /// Widget para pintar los items de los pedidos en una lista desplazable.
 class OrderListWidget extends StatelessWidget {
   final List<Order> orders;
+  final String Function(String imageUrl) getImageUrl;
 
   const OrderListWidget({
     super.key,
     required this.orders,
+    required this.getImageUrl,
   });
 
   @override
@@ -37,7 +39,10 @@ class OrderListWidget extends StatelessWidget {
           itemCount: orders.length,
           itemBuilder: (context, index) {
             final order = orders[index];
-            return OrderListItemWidget(order: order);
+            return OrderListItemWidget(
+              order: order,
+              imageUrl: getImageUrl(order.imageId ?? ""),
+            );
           },
         );
       },

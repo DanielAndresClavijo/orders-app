@@ -83,7 +83,20 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
                   color: Colors.yellow,
                   borderRadius: BorderRadius.circular(8),
                 ),
+                clipBehavior: Clip.antiAlias,
                 height: 180,
+                child: Image.network(
+                  ref
+                      .read(orderListNotifierProvider.notifier)
+                      .getOrderPublicUrl(_order?.imageId ?? ""),
+                  fit: BoxFit.fitWidth,
+                  width: double.infinity,
+                  errorBuilder: (context, error, stackTrace) {
+                    return SvgPicture.asset(
+                      Assets.staticOrderImage,
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 16),
               Flexible(

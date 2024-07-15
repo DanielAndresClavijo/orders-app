@@ -81,7 +81,14 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  Flexible(child: OrderListWidget(orders: _orders)),
+                  Flexible(
+                    child: OrderListWidget(
+                      orders: _orders,
+                      getImageUrl: ref
+                          .read(orderListNotifierProvider.notifier)
+                          .getOrderPublicUrl,
+                    ),
+                  ),
                 ],
               ),
             ),
