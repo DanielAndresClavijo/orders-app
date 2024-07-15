@@ -28,7 +28,7 @@ class AppConfig {
   /// Configura las variables de la aplicación.
   factory AppConfig.initialize() {
     return const AppConfig._(
-      clientEnvironment: ClientEnvironment.fromBaaS,
+      clientEnvironment: ClientEnvironment.fromMock,
       supabaseUrl: "https://trracpsdbbntajgygbla.supabase.co",
       supabaseKey:
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRycmFjcHNkYmJudGFqZ3lnYmxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjA0NzU5NDAsImV4cCI6MjAzNjA1MTk0MH0.uJ-iKjHZ3Zy-lNSo9L1YpMiyFizStFhHHPWDfMvsefA",

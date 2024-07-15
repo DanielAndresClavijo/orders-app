@@ -16,9 +16,14 @@ class OrdersLocalDatasource extends OrdersDatasource {
     final int? offset,
   }) async {
     final filteredOrders =
-        _ordersMock.where((o) => o.status == status).toList();
+        _ordersMock.where((o) => status == null || o.status == status).toList();
     final startIndex = offset ?? 0;
-    final endIndex = limit == null ? null : startIndex + limit;
+    int? endIndex = limit == null ? null : startIndex + limit;
+    if ((endIndex ?? 0) > (filteredOrders.length - 1)) {
+      endIndex = startIndex < filteredOrders.length
+          ? filteredOrders.length
+          : startIndex + 1;
+    }
     final result = filteredOrders.sublist(startIndex, endIndex);
     return Future.value((_ordersMock.length, result));
   }

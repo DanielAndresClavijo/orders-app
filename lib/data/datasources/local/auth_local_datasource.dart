@@ -42,7 +42,7 @@ class AuthLocalDatasource extends AuthDatasource {
   }
 }
 
-User? _userInSession = _usersMock.firstOrNull;
+User? _userInSession;
 List<User> _usersMock = [
   const User(userId: "1", email: "example@email.com"),
 ];

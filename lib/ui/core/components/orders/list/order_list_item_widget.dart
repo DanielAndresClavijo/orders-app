@@ -44,7 +44,7 @@ class OrderListItemWidget extends StatelessWidget {
                           fit: BoxFit.cover,
                           width: 60,
                           errorBuilder: (context, error, stackTrace) {
-                            return SvgPicture.asset(
+                            return Image.asset(
                               Assets.staticOrderImage,
                               fit: BoxFit.cover,
                             );

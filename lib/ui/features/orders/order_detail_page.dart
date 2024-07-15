@@ -80,7 +80,7 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.yellow,
+                  color: Colors.grey,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 clipBehavior: Clip.antiAlias,
@@ -92,8 +92,10 @@ class _OrderDetailState extends ConsumerState<OrderDetailPage> {
                   fit: BoxFit.fitWidth,
                   width: double.infinity,
                   errorBuilder: (context, error, stackTrace) {
-                    return SvgPicture.asset(
+                    return Image.asset(
                       Assets.staticOrderImage,
+                      fit: BoxFit.fitWidth,
+                      width: double.infinity,
                     );
                   },
                 ),
