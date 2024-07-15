@@ -24,7 +24,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       paymentMethod:
           $enumDecodeNullable(_$PaymentMethodEnumMap, json['payment_method']),
       uuid: json['user_id'] as String,
-      imageId: json['image_id'] as String? ?? "",
+      imageId: json['image_id'] as String?,
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{

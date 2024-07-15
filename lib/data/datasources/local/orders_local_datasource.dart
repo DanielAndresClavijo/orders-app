@@ -10,8 +10,17 @@ class OrdersLocalDatasource extends OrdersDatasource {
   }
 
   @override
-  Future<List<Order>> getAll() async {
-    return Future.value(_ordersMock);
+  Future<(int count, List<Order> orders)> getAll({
+    final OrderStatus? status,
+    final int? limit,
+    final int? offset,
+  }) async {
+    final filteredOrders =
+        _ordersMock.where((o) => o.status == status).toList();
+    final startIndex = offset ?? 0;
+    final endIndex = limit == null ? null : startIndex + limit;
+    final result = filteredOrders.sublist(startIndex, endIndex);
+    return Future.value((_ordersMock.length, result));
   }
 }
 

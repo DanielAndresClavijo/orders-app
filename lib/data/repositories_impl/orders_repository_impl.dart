@@ -20,9 +20,17 @@ class OrdersRepositoryImpl extends OrdersRepository {
   }
 
   @override
-  Future<List<Order>> getAll() async {
+  Future<(int count, List<Order> orders)> getAll({
+    final OrderStatus? status,
+    final int? limit,
+    final int? offset,
+  }) async {
     try {
-      final result = await datasource.getAll();
+      final result = await datasource.getAll(
+        status: status,
+        limit: limit,
+        offset: offset,
+      );
       return Future.value(result);
     } catch (e) {
       debugPrint("Error OrdersRepositoryImpl.getAll: $e");

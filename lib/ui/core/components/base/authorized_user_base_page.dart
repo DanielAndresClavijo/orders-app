@@ -30,6 +30,7 @@ class AuthorizedBasePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 0,
+        surfaceTintColor: Colors.transparent,
         title: Center(
           child: SizedBox(
             width: kWidthPage,

@@ -5,6 +5,7 @@ import 'package:orders_app/injector/injector_providers.dart';
 import 'package:orders_app/ui/core/components/orders/list/order_list_widget.dart';
 import 'package:orders_app/ui/core/constants_app.dart';
 import 'package:orders_app/ui/core/extensions/context_extension.dart';
+import 'package:orders_app/ui/features/orders/order_view_model.dart';
 
 /// Página donde se listan las ordenes.
 class OrderListPage extends ConsumerStatefulWidget {
@@ -24,7 +25,10 @@ class _OrderListPageState extends ConsumerState<OrderListPage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(orderListNotifierProvider.notifier).getOrders();
+      ref.read(orderListNotifierProvider.notifier).getOrders(
+            nextPage: 1,
+            showItemCount: kPageCount.first,
+          );
     });
   }
 

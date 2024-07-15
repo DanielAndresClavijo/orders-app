@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:orders_app/data/datasources/orders_datasource.dart';
 import 'package:orders_app/domain/entities/order.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -10,25 +11,47 @@ class OrdersSupabaseDatasource extends OrdersDatasource {
 
   @override
   Future<Order?> get(int id) async {
-    final response = await client
-        .from(orderTableName)
-        .select('*, product_order(*)')
-        .eq('id', id)
-        .single();
-    print("OrdersSupabaseDatasource.get: $response");
-    final foundedOrder = Order.fromJson(response);
-    return Future.value(foundedOrder);
+    try {
+      final response = await client.rest
+          .rpc("get_orders_with_products", params: {'p_order_id': id}).single();
+      final foundedOrder = Order.fromJson(response);
+      return Future.value(foundedOrder);
+    } on PostgrestException catch (e) {
+      debugPrint("ERROR OrdersSupabaseDatasource.getAll: $e");
+      return Future.error(e.code.toString());
+    } catch (e) {
+      debugPrint("ERROR OrdersSupabaseDatasource.getAll: $e");
+      return Future.error(e);
+    }
   }
 
   @override
-  Future<List<Order>> getAll() async {
-    final response = await client.rpc('get_orders_with_products');
-    if (response is! List) return Future.error("Not found");
-    print(response);
-    print("##############OrdersSupabaseDatasource.getAll###################");
-    response.map((e) => print(e));
-    print("##############OrdersSupabaseDatasource.getAll###################");
-    final result = response.map((o) => Order.fromJson(o));
-    return Future.value(result.toList());
+  Future<(int count, List<Order> orders)> getAll({
+    final OrderStatus? status,
+    final int? limit,
+    final int? offset,
+  }) async {
+    try {
+      final response = await client.rest.rpc(
+        "get_orders_with_products",
+        params: {
+          'p_status': status?.name,
+          'p_limit': limit,
+          'p_offset': offset,
+        },
+      );
+      if (response is! List) return Future.error("Not found");
+      final result = response.map((o) => Order.fromJson(o));
+      int count = int.tryParse("${response.firstOrNull?["total_count"]}") ?? 0;
+      if (count < result.length) count = result.length;
+
+      return Future.value((count, result.toList()));
+    } on PostgrestException catch (e) {
+      debugPrint("ERROR OrdersSupabaseDatasource.getAll: $e");
+      return Future.error(e.code.toString());
+    } catch (e) {
+      debugPrint("ERROR OrdersSupabaseDatasource.getAll: $e");
+      return Future.error(e);
+    }
   }
 }

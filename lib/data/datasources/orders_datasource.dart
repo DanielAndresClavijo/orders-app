@@ -7,8 +7,19 @@ import 'package:orders_app/domain/entities/order.dart';
 ///  Nota: Utilizarla solo desde los repositorios.
 abstract class OrdersDatasource {
   /// Obtiene los detalles de un pediddo por [id]
+  ///
+  ///  - [id]: Para filtrar por ID de pedido.
   Future<Order?> get(int id);
 
   /// Obtiene todos los pedidos.
-  Future<List<Order>> getAll();
+  ///
+  ///  - [status]: Para filtrar por el estado de la orden.
+  ///  - [limit]: Para la paginación, especifica el número de resultados por página.
+  ///  - [offset]: Para la paginación, especifica desde qué posición empezar
+  ///              a devolver los resultados.
+  Future<(int totalOrders, List<Order> orders)> getAll({
+    final OrderStatus? status,
+    final int? limit,
+    final int? offset,
+  });
 }
