@@ -51,7 +51,7 @@ class OrderListViewModel extends StateNotifier<OrderListViewModelState> {
     final OrderStatus? status,
   }) async {
     try {
-      final offset = nextPage <= 1 ? 1 : nextPage * showItemCount;
+      final offset = (nextPage <= 1 ? 1 : nextPage * showItemCount) - 1;
       final (totalOrders, newOrders) = await ordersUseCase.getAll(
         offset: offset,
         limit: showItemCount,

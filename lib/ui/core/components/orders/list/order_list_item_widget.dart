@@ -47,14 +47,16 @@ class OrderListItemWidget extends StatelessWidget {
                           Flexible(
                             child: Text(
                               order.companyName,
-                              style:
-                                  context.font.titleLarge?.copyWith(height: 1),
+                              style: context.font.titleLarge?.copyWith(
+                                height: 1,
+                              ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           Flexible(
                             child: Text(
-                              "${order.products.length} artículos · \$${order.totalPrice.toStringAsFixed(2)}",
+                              "${order.products.length} artículos · "
+                              "\$${order.totalPrice.toStringAsFixed(2)}",
                               style: context.font.bodyMedium,
                               overflow: TextOverflow.ellipsis,
                             ),
