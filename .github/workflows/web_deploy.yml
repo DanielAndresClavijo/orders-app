@@ -56,8 +56,8 @@ jobs:
       - name: Update base href and script src in index.html
         run: |
           REPO_NAME=${{ github.repository }}
-          sed -i 's|href="|href="/'$GITHUB_REPOSITORY_OWNER'/|g' build/web/index.html
-          sed -i 's|src="|src="/'$GITHUB_REPOSITORY_OWNER'/|g' build/web/index.html
+          sed -i 's|href="|href="/'$REPOSITORY_NAME'/|g' build/web/index.html
+          sed -i 's|src="|src="/'$REPOSITORY_NAME'/|g' build/web/index.html
 
       - name: Echo and Remove symlinks
         run: |
