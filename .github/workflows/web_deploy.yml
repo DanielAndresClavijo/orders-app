@@ -53,6 +53,12 @@ jobs:
       - name: Build Flutter web app
         run: flutter build web --web-renderer html --release
 
+      - name: Echo and Remove symlinks
+        run: |
+          echo "The following symlinks will be removed:"
+          find build/web -type l -exec echo {} +
+          find build/web -type l -exec rm -f {} +
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
