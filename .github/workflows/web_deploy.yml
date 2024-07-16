@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,32 +31,32 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
           flutter-version: 3.22.2
-          
+
       - name: Install dependencies
         run: flutter pub get
-        
+
       - name: Configure Supabase credentials
         run: |
           sed -i 's|supabaseUrl: "https://your-supabase-url.supabase.co"|supabaseUrl: "${{ secrets.SUPABASE_URL }}"|g' lib/config/app_config.dart
           sed -i 's|supabaseKey: "your-supabase-api-key"|supabaseKey: "${{ secrets.SUPABASE_API_KEY }}"|g' lib/config/app_config.dart
 
       - name: Build Flutter web app
-        run: flutter build web --release
-        
+        run: flutter build web --web-renderer htm --release
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: 'build/web'
-          
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
