@@ -47,7 +47,7 @@ jobs:
           sed -i 's|supabaseKey: "your-supabase-api-key"|supabaseKey: "${{ secrets.SUPABASE_API_KEY }}"|g' lib/config/app_config.dart
 
       - name: Build Flutter web app
-        run: flutter build web --web-renderer htm --release
+        run: flutter build web --web-renderer html --release
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
